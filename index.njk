@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/">Plain</a></li>
                 <li><a href="basic/">Basic Auth</a></li>
-            <ul>
+            </ul>
         </nav>
         <h2>Request Information</h2>
         <h3>IP & TCP</h3>
@@ -60,11 +60,11 @@
                 <code>{{ search }}</code>
                 <br>Parsed:
                 {% if search_params.includes('\n') %}
-                <code>
-                    <pre>{{ search_params }}</pre>
-                </code>
+                    <code>
+                        <pre>{{ search_params }}</pre>
+                    </code>
                 {% else %}
-                <code>{{ search_params }}</code>
+                    <code>{{ search_params }}</code>
                 {% endif %}
             </li>
             <li>hash (fragment):
