@@ -1,0 +1,18 @@
+{
+  "name": "header-demo",
+  "version": "1.0.0",
+  "description": "node http server header demo",
+  "main": "index.js",
+  "repository": "git@github.com:uofa-cmput404/header-demo.git",
+  "author": "Hazel Victoria Campbell",
+  "license": "AGPL3",
+  "private": false,
+  "dependencies": {
+    "html-entities": "^2.4.0",
+    "nodemon": "^3.0.1",
+    "nunjucks": "^3.2.4"
+  },
+  "scripts": {
+    "serve": "nodemon index.js"
+  }
+}
