@@ -1,7 +1,6 @@
 const http = require("http"); // node!
 const assert = require('node:assert').strict;
 
-const html_entities = require('html-entities');
 const nunjucks = require("nunjucks");
 const multipart = require("parse-multipart-data");
 const BufferHex = require("buffer-hex").BufferHex;
