@@ -54,7 +54,9 @@ const breakCircularReferences = function (key, value) {
 
 const fix6 = function (addr) {
     addr = ''+addr;
-    if (addr.includes(':')) {
+    if (addr.includes('.')) {
+        return addr.replace('::ffff:', '');
+    } else if (addr.includes(':')) {
         return '[' + addr + ']';
     } else {
         return addr;
