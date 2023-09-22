@@ -1,2 +1,5 @@
 # header-demo
-HTTP 1 header demo server
+
+node.js header demo.
+
+[See it go.](https://buttercup.cs.ualberta.ca/)
