@@ -53,6 +53,7 @@ const breakCircularReferences = function (key, value) {
 }
 
 const fix6 = function (addr) {
+    addr = ''+addr;
     if (addr.includes(':')) {
         return '[' + addr + ']';
     } else {
@@ -78,11 +79,12 @@ const requestListener = function (req, res) {
     req.on('readable', () => {
         let chunk;
         while (null != (chunk = req.read(128))) {
-            chunks.push(chunk);
-            read += chunk.length;
+            if (!tooBig) {
+                chunks.push(chunk);
+                read += chunk.length;
+            }
             if (read > 1024) {
                 tooBig = true;
-                req.end();
             }
         }
     });
@@ -132,6 +134,7 @@ const requestListener = function (req, res) {
         context.statusMessage = res.statusMessage;
         context.headers_string = JSON.stringify(req.headers, undefined, '  ');
         context.search_params = JSON.stringify(Object.fromEntries(url.searchParams), undefined, '  ');
+        context.ipv = req.socket.remoteFamily;
         context.from_host = fix6(req.socket.remoteAddress);
         context.from_port = req.socket.remotePort;
         context.to_host = fix6(req.socket.localAddress);

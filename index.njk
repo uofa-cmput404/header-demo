@@ -3,8 +3,9 @@
     <h2>{{ statusCode }}
         {{ statusMessage }}</h2>
     <h2>Request Information</h2>
-    <h3>IP & TCP</h3>
+    <h3>Connection</h3>
     <ul>
+        <li>{{ ipv }}</li>
         <li>From:
             <code>{{ from_host }}:{{ from_port }}</code>
         </li>
