@@ -121,7 +121,15 @@ const requestListener = function (req, res) {
         context.request_string = JSON.stringify(req, breakCircularReferences, '  ');
         const url = new URL(req.url, `http://${req.headers.host}`);
         context.url = '' + url;
-        res.setHeader('Content-Type', 'text/html');
+        res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+        // res.setHeader('X-Frame-Options', 'DENY');
+        // res.setHeader('X-Content-Type-Options', 'nosniff');
+        res.setHeader('Content-Security-Policy', "default-src 'self';");
+        res.setHeader('Vary', 'Origin');
+        res.setHeader('Cache-Control', 'no-cache');
+        // res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+        // res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+        // res.setHeader('Permissions-Policy', 'geolocation=(), camera=(), microphone=(), interest-cohort=()');
         if (tooBig) {
             res.writeHead(413, "Request Entity Too Large");
         } else if (url.pathname.includes("/basic") && !req.headers['authorization']) {
