@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Header Test</title>
+    </head>
+    <body>
+        <h1>Header Test</h1>
+        {% include "nav.njk" %}
+        {% block content %}
+        <p>Hmm... there's nothing here...</p>
+        {% endblock %}
+    </body>
+</html>

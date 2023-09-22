@@ -1,110 +1,156 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf8">
-        <title>Header Test</title>
-    </head>
-    <body>
-        <h1>Header Test</h1>
-        <h2>Navigation</h2>
-        <nav>
-            <ul>
-                <li><a href="/">Plain</a></li>
-                <li><a href="basic/">Basic Auth</a></li>
-            </ul>
-        </nav>
-        <h2>Request Information</h2>
-        <h3>IP & TCP</h3>
-        <ul>
-            <li>From:
-                <code>{{ from_host }}:{{ from_port }}</code>
-            </li>
-            <li>To:
-                <code>{{ to_host }}:{{ to_port }}</code>
-            </li>
-        </ul>
-        <h3>HTTP</h3>
-        <ul>
-            <li>Version:
-                <code>{{ version }}</code>
-            </li>
-            <li>Method:
-                <code>{{ method }}</code>
-            </li>
-            <li>Path:
-                <code>{{ path }}</code>
-            </li>
-        </ul>
-        <h3>URL</h3>
-        <ul>
-            <li>reconstructed:
-                <code>{{ url }}</code>
-            </li>
-            <li>protocol:
-                <code>{{ protocol }}</code>
-            </li>
-            <li>username & password are sent by Basic auth</li>
-            <li>host (authority):
-                <code>{{ host }}</code>
-            </li>
-            <li>hostname:
-                <code>{{ hostname }}</code>
-            </li>
-            <li>port:
-                <code>{{ port }}</code>
-            </li>
-            <li>pathname:
-                <code>{{ pathname }}</code>
-            </li>
-            <li>search (query):
-                <code>{{ search }}</code>
-                <br>Parsed:
-                {% if search_params.includes('\n') %}
-                    <code>
-                        <pre>{{ search_params }}</pre>
-                    </code>
-                {% else %}
-                    <code>{{ search_params }}</code>
-                {% endif %}
-            </li>
-            <li>hash (fragment):
-                {% if hash %}
-                    <code>{{ hash }}</code>
-                {% else %}
-                    not sent by browser.
-                {% endif %}
-            </li>
-            <li>origin:
-                <code>{{ origin }}</code>
-            </li>
-        </ul>
-        <h3>Request Headers</h3>
-        <code>
-            <pre>{{ headers_string }}</pre>
-        </code>
-        <h3>Authroization</h3>
-        <ul>
-            <li>Authorization kind:
-                <code>{{ auth_kind }}</code>
-            </li>
-            <li>Authorization value:
-                <code>{{ auth_value }}</code>
-            </li>
-            {% if basic %}
-                <li>Decoded:
-                    <code>{{ basic }}</code>
-                </li>
-                <li>Username:
-                    <code>{{ user }}</code>
-                </li>
-                <li>Password:
-                    <code>{{ password }}</code>
-                </li>
+{% extends "base.njk" %}
+{% block content %}
+    <h2>{{ statusCode }}
+        {{ statusMessage }}</h2>
+    <h2>Request Information</h2>
+    <h3>IP & TCP</h3>
+    <ul>
+        <li>From:
+            <code>{{ from_host }}:{{ from_port }}</code>
+        </li>
+        <li>To:
+            <code>{{ to_host }}:{{ to_port }}</code>
+        </li>
+    </ul>
+    <h3>HTTP</h3>
+    <ul>
+        <li>Version:
+            <code>{{ version }}</code>
+        </li>
+        <li>Method:
+            <code>{{ method }}</code>
+        </li>
+        <li>Path:
+            <code>{{ path }}</code>
+        </li>
+    </ul>
+    <h3>URL</h3>
+    <ul>
+        <li>reconstructed:
+            <code>{{ url }}</code>
+        </li>
+        <li>protocol:
+            <code>{{ protocol }}</code>
+        </li>
+        <li>username & password are sent by Basic auth</li>
+        <li>host (authority):
+            <code>{{ host }}</code>
+        </li>
+        <li>hostname:
+            <code>{{ hostname }}</code>
+        </li>
+        <li>port:
+            <code>{{ port }}</code>
+        </li>
+        <li>pathname:
+            <code>{{ pathname }}</code>
+        </li>
+        <li>search (query):
+            <code>{{ search }}</code>
+            <br/>Parsed:
+            {% if search_params.includes('\n') %}
+                <code>
+                    <pre>{{ search_params }}</pre>
+                </code>
+            {% else %}
+                <code>{{ search_params }}</code>
             {% endif %}
-        </ul>
-        <h3>Raw node request</h3>
-        <code>
-            <pre>{{ request_string }}</pre>
-        </code>
-    </body>
-</html>
+        </li>
+        <li>hash (fragment):
+            {% if hash %}
+                <code>{{ hash }}</code>
+            {% else %}
+                not sent by browser.
+            {% endif %}
+        </li>
+        <li>origin:
+            <code>{{ origin }}</code>
+        </li>
+    </ul>
+    <h3>Request Headers</h3>
+    <code>
+        <pre>{{ headers_string }}</pre>
+    </code>
+    <h3>Authroization</h3>
+    <ul>
+        <li>Authorization kind:
+            <code>{{ auth_kind }}</code>
+        </li>
+        <li>Authorization value:
+            <code>{{ auth_value }}</code>
+        </li>
+        {% if basic %}
+            <li>Decoded:
+                <code>{{ basic }}</code>
+            </li>
+            <li>Username:
+                <code>{{ user }}</code>
+            </li>
+            <li>Password:
+                <code>{{ password }}</code>
+            </li>
+        {% endif %}
+    </ul>
+    <h3>Request Body</h3>
+    <ul>
+        <li>Length: {{ read }}</li>
+        {% if contentType %}
+            <li>Content type:
+                <code>{{ contentType }}</code>
+            </li>
+        {% endif %}
+        {% if ctArg %}
+            <li>Content type argument:
+                <code>{{ ctArg }}</code>
+            </li>
+        {% endif %}
+        {% if postError %}
+            <li>Parsing post data error:
+                <code>{{ postError }}</code>
+            </li>
+        {% endif %}
+        {% if boundary %}
+            <li>Boundary:
+                <code>{{ boundary }}</code>
+            </li>
+        {% endif %}
+        {% if parts %}
+            <li>{{ parts }} parts</li>
+        {% endif %}
+        {% if postData %}
+            <li>Post data:
+                <ul>
+                    {% for i in postData %}
+                        <li>
+                            <code>{{ i.name }}</code>
+                            =
+                            {% if i.value %}
+                               <code>{{ i.value }}</code>
+                            {% endif %}
+                            {% if i.filename %}
+                                <br/>filename=<code>{{ i.filename }}</code>
+                            {% endif %}
+                            {% if i.type %}
+                                <br/>type=<code>{{ i.type }}</code>
+                            {% endif %}
+                            {% if i.data %}
+                                <code>
+                                    <pre>{{ i.data }}</pre>
+                                </code>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+        <li>Raw request body as utf8:<br/>
+            <code>
+                <pre>{{ body }}</pre>
+            </code>
+        </li>
+    </ul>
+    <h3>Raw node request</h3>
+    <code>
+        <pre>{{ request_string }}</pre>
+    </code>
+{% endblock %}

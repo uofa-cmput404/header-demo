@@ -1,0 +1,30 @@
+{% extends "base.njk" %}
+{% block content %}
+    <h2>Form Test</h2>
+    <form method="GET" action="../">
+        <h3>GET Form</h3>
+        <label for="name">Name: </label>
+        <input type="text" name="name" required/>
+        <label for="occupation">Occupation: </label>
+        <input type="text" name="occupation" required/>
+        <input type="submit" value="Get!"/>
+    </form>
+    <form method="POST" action="../">
+        <h3>POST application/x-www-urlencoded Form</h3>
+        <label for="name">Name: </label>
+        <input type="text" name="name" required/>
+        <label for="occupation">Occupation: </label>
+        <input type="text" name="occupation" required/>
+        <input type="submit" value="Post!"/>
+    </form>
+    <form method="POST" enctype="multipart/form-data" action="../">
+        <h3>POST multipart/form-data Form</h3>
+        <label for="name">Name: </label>
+        <input type="text" name="name" required/>
+        <label for="occupation">Occupation: </label>
+        <input type="text" name="occupation" required/>
+        <label for="upload">Upload (max 1KiB): </label>
+        <input type="file" name="upload"/>
+        <input type="submit" value="Post!"/>
+    </form>
+{% endblock %}

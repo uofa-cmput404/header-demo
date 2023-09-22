@@ -50,6 +50,14 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+buffer-hex@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/buffer-hex/-/buffer-hex-1.0.0.tgz#e70918c287933cfa8176069488fb29ee98f832c7"
+  integrity sha512-GSy7qy+rheftuZ9CsQbSyV8KChqpgo91ZBaBezanltk5m5SWEqtWhL8KZCEXHYX4IUKttnT+Qz0lNC6/ZBT8vw==
+  dependencies:
+    colors "^1.4.0"
+    terminal-styler "^1.0.0"
+
 chokidar@^3.5.2:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
@@ -64,6 +72,11 @@ chokidar@^3.5.2:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+colors@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
+  integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
 
 commander@^5.1.0:
   version "5.1.0"
@@ -105,11 +118,6 @@ has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==
-
-html-entities@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-2.4.0.tgz#edd0cee70402584c8c76cc2c0556db09d1f45061"
-  integrity sha512-igBTJcNNNhvZFRtm8uA6xMY6xYleeDwn3PeBCkDz7tHttv4F2hsDI2aPgNERWzvRcNYHNT3ymRaQzllmXj4YsQ==
 
 ignore-by-default@^1.0.1:
   version "1.0.1"
@@ -196,6 +204,11 @@ nunjucks@^3.2.4:
     asap "^2.0.3"
     commander "^5.1.0"
 
+parse-multipart-data@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/parse-multipart-data/-/parse-multipart-data-1.5.0.tgz#ab894cc6c40229d0a2042500e120df7562d94b87"
+  integrity sha512-ck5zaMF0ydjGfejNMnlo5YU2oJ+pT+80Jb1y4ybanT27j+zbVP/jkYmCrUGsEln0Ox/hZmuvgy8Ra7AxbXP2Mw==
+
 picomatch@^2.0.4, picomatch@^2.2.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
@@ -233,6 +246,13 @@ supports-color@^5.5.0:
   integrity sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==
   dependencies:
     has-flag "^3.0.0"
+
+terminal-styler@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/terminal-styler/-/terminal-styler-1.0.0.tgz#b6d039cb59c8ae0bb2bb8cdd9c11190773025a0d"
+  integrity sha512-LL0NXF0PqmcGKX4cpnuNClVIn37w9L4kIEc0LKd0944/BF0F0f7gRsA+JgTcqUFim8OV7BwzYaj47laS4SezPA==
+  dependencies:
+    colors "^1.4.0"
 
 to-regex-range@^5.0.1:
   version "5.0.1"
