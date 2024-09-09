@@ -9,7 +9,7 @@
   "private": false,
   "dependencies": {
     "buffer-hex": "^1.0.0",
-    "nodemon": "^3.0.1",
+    "nodemon": "^3.1.4",
     "nunjucks": "^3.2.4",
     "parse-multipart-data": "^1.5.0"
   },
