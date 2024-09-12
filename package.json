@@ -8,10 +8,10 @@
   "license": "AGPL3",
   "private": false,
   "dependencies": {
-    "buffer-hex": "^1.0.0",
-    "nodemon": "^3.1.4",
-    "nunjucks": "^3.2.4",
-    "parse-multipart-data": "^1.5.0"
+    "buffer-hex": "",
+    "nodemon": "",
+    "nunjucks": "",
+    "parse-multipart-data": ""
   },
   "scripts": {
     "serve": "nodemon index.js"

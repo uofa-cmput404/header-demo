@@ -30,27 +30,37 @@ const noCaseCompare = function (a, b) {
     );
 }
 
-const breakCircularReferences = function (key, value) {
-    let found = false;
-    if (
-        value === null
-        || value === undefined
-        || !Object.keys(value).length
-    ) {
-        return value;
-    }
-    for (reference of references) {
-        if (Object.is(value, reference)) {
-            found = true;
+const breakCircularReferences = () => {
+    const references = [];
+    const reference_keys = [];
+        return (key, value) => {
+        let found = false;
+        if (
+            value === null
+            || value === undefined
+            || !Object.keys(value).length
+        ) {
+            return value;
         }
-    }
-    if (found) {
-        return "...";
-    } else {
-        references.push(value);
-        return value;
-    }
-}
+        let reference_key;
+        for (index in references) {
+            reference = references[index];
+            reference_key = reference_keys[index];
+            if (Object.is(value, reference)) {
+                found = true;
+            }
+        }
+        if (found) {
+            return ''+value+' '+reference_key;
+        } else if (typeof value === "object") {
+            references.push(value);
+            reference_keys.push(key);
+            return value;
+        } else {
+            return value;
+        }
+    };
+};
 
 const fix6 = function (addr) {
     addr = ''+addr;
@@ -96,29 +106,7 @@ const requestListener = function (req, res) {
             body: chunks.join(''),
         };
         chunks = Buffer.concat(chunks);
-        const references = [];
-        const breakCircularReferences = function (key, value) {
-            let found = false;
-            if (
-                value === null
-                || value === undefined
-                || !Object.keys(value).length
-            ) {
-                return value;
-            }
-            for (reference of references) {
-                if (Object.is(value, reference)) {
-                    found = true;
-                }
-            }
-            if (found) {
-                return "...";
-            } else {
-                references.push(value);
-                return value;
-            }
-        }
-        context.request_string = JSON.stringify(req, breakCircularReferences, '  ');
+        context.request_string = JSON.stringify(req, breakCircularReferences(), '  ');
         const url = new URL(req.url, `http://${req.headers.host}`);
         context.url = '' + url;
         res.setHeader('Content-Type', 'text/html; charset=UTF-8');
@@ -206,6 +194,15 @@ const requestListener = function (req, res) {
                 }
             }
         }
+        everything = structuredClone(context);
+        everything.request = JSON.parse(JSON.stringify(req, breakCircularReferences()));
+        delete everything.request_string;
+        everything.headers = JSON.parse(everything.headers_string);
+        delete everything.headers_string;
+        everything.search_params = JSON.parse(everything.search_params);
+        everything = JSON.stringify(everything, undefined, 2);
+        context.everything = everything;
+        context.everything_comment = everything.replaceAll('--', '\\u002d\\u002d');
         if (url.pathname.includes("/form")) {
             res.end(nunjucks.render("form.njk", context));
         } else {
