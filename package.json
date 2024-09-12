@@ -14,6 +14,6 @@
     "parse-multipart-data": ""
   },
   "scripts": {
-    "serve": "nodemon index.js"
+    "serve": "node index.js"
   }
 }
