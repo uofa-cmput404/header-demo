@@ -107,7 +107,14 @@ const requestListener = function (req, res) {
         };
         chunks = Buffer.concat(chunks);
         context.request_string = JSON.stringify(req, breakCircularReferences(), '  ');
-        const url = new URL(req.url, `http://${req.headers.host}`);
+        try {
+            const url = new URL(req.url, `http://${req.headers.host}`);
+        } catch (error) {
+            res.writeHead(400, "Bad Request");
+            res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
+            res.end("Invalid host header: " + req.headers.host + "\n" + error.message);
+            return;
+        }
         context.url = '' + url;
         res.setHeader('Content-Type', 'text/html; charset=UTF-8');
         // res.setHeader('X-Frame-Options', 'DENY');
