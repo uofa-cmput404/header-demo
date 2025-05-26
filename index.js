@@ -108,7 +108,7 @@ const requestListener = function (req, res) {
         chunks = Buffer.concat(chunks);
         context.request_string = JSON.stringify(req, breakCircularReferences(), '  ');
         try {
-            const url = new URL(req.url, `http://${req.headers.host}`);
+            var url = new URL(req.url, `http://${req.headers.host}`);
         } catch (error) {
             res.writeHead(400, "Bad Request");
             res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
