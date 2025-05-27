@@ -110,8 +110,8 @@ const requestListener = function (req, res) {
         try {
             var url = new URL(req.url, `http://${req.headers.host}`);
         } catch (error) {
-            res.writeHead(400, "Bad Request");
             res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
+            res.writeHead(400, "Bad Request");
             res.end("Invalid host header: " + req.headers.host + "\n" + error.message);
             return;
         }
