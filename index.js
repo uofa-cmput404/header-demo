@@ -131,6 +131,10 @@ const requestListener = function (req, res) {
             res.writeHead(401, "Unauthorized", {
                 'WWW-Authenticate': 'Basic realm="Enter any username and password"',
             });
+        } else if (url.pathname.endsWith("/redirect/301/")) {
+            res.writeHead(301, "Moved Permanently", {
+                'Location': '../../',
+            });
         } else {
             res.writeHead(200, "OK", {
             });
